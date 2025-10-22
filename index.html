@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Future is Almost Here</title>
     <style>
-        /* 1. Basic Setup & Minimal Dark Mode */
+        /* 1. Basic Setup & B&W Theme */
         * {
             margin: 0;
             padding: 0;
@@ -15,15 +15,14 @@
         html, body {
             height: 100%;
             width: 100%;
-            /* Using a system font stack is very minimal and sleek */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            overflow: hidden; /* Prevents scrolling */
+            overflow: hidden;
         }
 
-        /* 2. Sleek Animated Background */
+        /* 2. Sleek Animated B&W Background */
         body {
-            /* A dark, subtle gradient */
-            background: linear-gradient(-45deg, #0a0a0a, #1a001a, #001a1a, #0a0a0a);
+            /* Changed to a dark, subtle black/grey gradient */
+            background: linear-gradient(-45deg, #000000, #1a1a1a, #000000, #111111);
             background-size: 400% 400%;
             animation: backgroundGradient 15s ease infinite;
         }
@@ -34,9 +33,10 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 3. Center the Content */
+        /* 3. Center the Content (Vertically Stacked) */
         .container {
             display: flex;
+            flex-direction: column; /* Stacks h1 and button */
             justify-content: center;
             align-items: center;
             height: 100%;
@@ -44,30 +44,65 @@
             text-align: center;
         }
 
-        /* 4. The Flashy Animated Text */
+        /* 4. The Flashy B&W Animated Text */
         h1 {
-            /* Responsive font size and sleek, thin weight */
             font-size: clamp(2.5rem, 6vw, 6rem);
             font-weight: 200;
             letter-spacing: 3px;
             
-            /* This creates the "shining" text effect */
-            background: linear-gradient(90deg, #00ffff, #ff00ff, #ffffff, #00ffff);
-            background-size: 200% auto; /* 200% size is key for the movement */
+            /* Changed to a white/grey "shining" gradient */
+            background: linear-gradient(90deg, #888888, #ffffff, #ffffff, #888888);
+            background-size: 200% auto;
             
-            /* This clips the background to the text shape */
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             
-            /* We combine three separate animations! */
             animation: 
-                fadeIn 2s ease-out, /* Animation 1: Fade in on load */
-                textShine 4s linear infinite, /* Animation 2: Gradient shine */
-                pulse 3s ease-in-out infinite alternate; /* Animation 3: Subtle glow */
+                fadeIn 2s ease-out,
+                textShine 4s linear infinite,
+                pulse 3s ease-in-out infinite alternate;
         }
 
-        /* Animation 1: Fade in on load */
+        /* 5. The Minimal & Sleek Button */
+        .abyss-button {
+            /* Inherit the sleek font */
+            font-family: inherit;
+            font-weight: 300;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            
+            /* Minimal B&W style */
+            background-color: transparent;
+            border: 1px solid #555555;
+            color: #aaaaaa;
+            
+            padding: 10px 20px;
+            margin-top: 30px;
+            cursor: pointer;
+            
+            /* Set opacity to 0 to be faded in */
+            opacity: 0; 
+            
+            /* Delayed fade-in animation */
+            animation: fadeInButton 2s ease-out 1s forwards; /* 1s delay */
+            
+            /* Sleek transition for hover */
+            transition: all 0.3s ease;
+        }
+
+        .abyss-button:hover {
+            color: #000000;
+            background-color: #ffffff;
+            border-color: #ffffff;
+            /* White glow on hover */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        /* 6. All Animations */
+
+        /* Animation for h1 fade-in */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -79,22 +114,33 @@
             }
         }
 
-        /* Animation 2: Animated gradient shine */
+        /* Animation for button fade-in (runs after h1) */
+        @keyframes fadeInButton {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation for h1 gradient shine */
         @keyframes textShine {
             to {
-                /* Moves the background gradient */
                 background-position: 200% center;
             }
         }
 
-        /* Animation 3: Subtle glow pulse */
+        /* Animation for h1 B&W pulse */
         @keyframes pulse {
             from {
-                /* Uses text-shadow to create a glow that matches the gradient */
-                text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.3);
+                /* Changed to a white/grey shadow */
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
             }
             to {
-                text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 40px rgba(255, 0, 255, 0.7);
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
             }
         }
     </style>
@@ -103,6 +149,7 @@
 
     <div class="container">
         <h1>The Future is Almost Here.</h1>
+        <button class="abyss-button">Enter the Abyss</button>
     </div>
 
 </body>
