@@ -64,7 +64,7 @@
                 pulse 3s ease-in-out infinite alternate;
         }
 
-        /* 5. The Minimal & Sleek Button */
+        /* 5. The Minimal & Sleek Button (Now an <a> tag) */
         .abyss-button {
             /* Inherit the sleek font */
             font-family: inherit;
@@ -72,6 +72,7 @@
             font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
+            text-decoration: none; /* Added to remove underline from link */
             
             /* Minimal B&W style */
             background-color: transparent;
@@ -149,8 +150,10 @@
 
     <div class="container">
         <h1>The Future is Almost Here.</h1>
-        <button class="abyss-button">Enter the Abyss</button>
+        <!-- This is now an <a> tag pointing to abyss.html -->
+        <a href="abyss.html" class="abyss-button">Enter the Abyss</a>
     </div>
 
 </body>
 </html>
+
