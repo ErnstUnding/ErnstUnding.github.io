@@ -1,9 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Transmission Active</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future is Almost Here</title>
+    <style>
+        /* 1. Basic Setup & Minimal Dark Mode */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            /* Using a system font stack is very minimal and sleek */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden; /* Prevents scrolling */
+        }
+
+        /* 2. Sleek Animated Background */
+        body {
+            /* A dark, subtle gradient */
+            background: linear-gradient(-45deg, #0a0a0a, #1a001a, #001a1a, #0a0a0a);
+            background-size: 400% 400%;
+            animation: backgroundGradient 15s ease infinite;
+        }
+
+        @keyframes backgroundGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 3. Center the Content */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* 4. The Flashy Animated Text */
+        h1 {
+            /* Responsive font size and sleek, thin weight */
+            font-size: clamp(2.5rem, 6vw, 6rem);
+            font-weight: 200;
+            letter-spacing: 3px;
+            
+            /* This creates the "shining" text effect */
+            background: linear-gradient(90deg, #00ffff, #ff00ff, #ffffff, #00ffff);
+            background-size: 200% auto; /* 200% size is key for the movement */
+            
+            /* This clips the background to the text shape */
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            
+            /* We combine three separate animations! */
+            animation: 
+                fadeIn 2s ease-out, /* Animation 1: Fade in on load */
+                textShine 4s linear infinite, /* Animation 2: Gradient shine */
+                pulse 3s ease-in-out infinite alternate; /* Animation 3: Subtle glow */
+        }
+
+        /* Animation 1: Fade in on load */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation 2: Animated gradient shine */
+        @keyframes textShine {
+            to {
+                /* Moves the background gradient */
+                background-position: 200% center;
+            }
+        }
+
+        /* Animation 3: Subtle glow pulse */
+        @keyframes pulse {
+            from {
+                /* Uses text-shadow to create a glow that matches the gradient */
+                text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.3);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 40px rgba(255, 0, 255, 0.7);
+            }
+        }
+    </style>
 </head>
 <body>
- <h1>Signal Received. Standby for assets.</h1>
+
+    <div class="container">
+        <h1>The Future is Almost Here.</h1>
+    </div>
+
 </body>
 </html>
