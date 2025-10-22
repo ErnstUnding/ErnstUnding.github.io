@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Abyss</title>
+    <style>
+        /* Basic reset to make canvas fullscreen */
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            /* Start with a pure black background */
+            background-color: #000;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- This canvas is where the animation will be drawn -->
+    <canvas id="abyssCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('abyssCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let particles = [];
+        const numParticles = 700; // More particles for a "denser" mass
+
+        // Function to set canvas to full screen
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        // Adjust canvas on window resize
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas(); // Set initial size
+
+        // Particle class
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            // Reset particle to the center
+            reset() {
+                this.x = canvas.width / 2;
+                this.y = canvas.height / 2;
+                this.radius = Math.random() * 2 + 0.5; // Small particles
+                
+                // Dark grey, slightly transparent
+                this.color = `rgba(30, 30, 30, ${Math.random() * 0.5 + 0.2})`; 
+                
+                this.angle = Math.random() * Math.PI * 2; // Random starting angle
+                this.speed = Math.random() * 0.02 + 0.005; // How fast it orbits
+                this.distance = Math.random() * 10 + 1; // Start near the center
+                
+                // How fast it moves outward
+                this.distanceSpeed = Math.random() * 0.2 + 0.1; 
+            }
+
+            update() {
+                // Update angle and distance
+                this.angle += this.speed;
+                this.distance += this.distanceSpeed;
+
+                // Calculate new x, y from center
+                this.x = canvas.width / 2 + Math.cos(this.angle) * this.distance;
+                this.y = canvas.height / 2 + Math.sin(this.angle) * this.distance;
+
+                // Reset particle if it goes too far off-screen
+                const maxDistance = Math.max(canvas.width, canvas.height) / 2;
+                if (this.distance > maxDistance) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        // Create all particles
+        function init() {
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            // This is the key: draw a semi-transparent black rectangle
+            // over the whole screen each frame. This creates the "trails"
+            // and makes it look like a swirling mass.
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Update and draw every particle
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            // Loop the animation
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+    </script>
+</body>
+</html>
